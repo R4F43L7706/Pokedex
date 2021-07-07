@@ -25,13 +25,21 @@ function Pokemon() {
 
     return (
         <div>
-            <h1>Pokemon {Router.query.id}</h1>
-            <img 
-                src={pokemon.sprites.other["official-artwork"].front_default || ""} 
-                alt={"imagem do pokemon ${pokemon.name}"}
-                width={300}
-            />
             <PokemonTitle id={Router.query.id} name={pokemon.name} />
+            {!!pokemon.sprites ?
+                <img 
+                    src={pokemon.sprites.other["official-artwork"].front_default} 
+                    alt={"imagem do pokemon ${pokemon.name}"}
+                    width={300}
+                />
+            :
+                <img 
+                    src={"https://pbs.twimg.com/media/Dl8nOCfXoAAt6E1.png"} 
+                    alt={"imagem do pokemon ${pokemon.name}"}
+                    width={300}
+                />
+
+            }
             <PokemonStats stats={pokemon.stats} />
         </div>
     )
