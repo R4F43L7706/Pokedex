@@ -9,15 +9,13 @@ export default function Home({  }) {
  const [offset, setOffset] = useState(0)
  const [limit, setLimit] = useState(20)
     useEffect(() => {
-      fetch('https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}')
-      .then( res => res.json())
-      .then(data => {
-        setpokemonlist(data.results)
-      })
-    
+      async function getDataPokemon() {
+        const body = await fetch('https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}')
+        const pokemon = await body.json()
+         setpokemonlist(await pokemon.results)
+      }   
+      getDataPokemon()
     }, [])
-   
-  
 
   return (
     <>
@@ -28,7 +26,7 @@ export default function Home({  }) {
      
       <u1>
         {pokemonlist.map((pokemon, id) => (
-          <li><PokemonCard id={id+offset+1} name={pokemon.name} key={id} /></li>
+          <li key={id}><PokemonCard  id={id+offset+1} name={pokemon.name} /></li>
         ))}
       </u1>
      </>   
