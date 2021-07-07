@@ -27,7 +27,7 @@ function Pokemon() {
         <div>
             <h1>Pokemon {Router.query.id}</h1>
             <img 
-                src={pokemon.sprites.other["official-artwork"].front_default} 
+                src={pokemon.sprites.other["official-artwork"].front_default || ""} 
                 alt={"imagem do pokemon ${pokemon.name}"}
                 width={300}
             />
